@@ -1,0 +1,19 @@
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+#front-form{
+	margin-left: 200px;
+}
+
+#front-form-input{
+	width:600px;
+}
+.productPlacement{
+	/*height:250px;*/
+}
+.productPlacement img{
+	height: 250px;
+}
+
