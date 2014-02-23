@@ -4,6 +4,36 @@ define(["jquery","bootstrap","socketio", "cookie"], function($) {
 
 
     $(document).ready(function(){
+
+      $('.bidContent').on('click','.vendorInfoBtn', function(el){
+      // ok we need to find wich form was processed
+      var vendorId = $($(this).parent()[0][1]).val();
+      console.log("this is the vendor id"+vendorId);
+      //now we need to get the vendor id
+      // $.post( "/forInfo", {'vendorId':vendorId  }, function(res){
+
+      // } );
+      document.location = '/store-front?store='+vendorId;
+
+      // console.log(thisForm);
+  })
+
+      $('.bidContent').on('click','.vendorWinBtn', function(el){
+      // ok we need to find wich form was processed
+      var vendorId = $($(this).parent()[0][1]).val();
+      var auctionId = $($(this).parent()[0][0]).val();
+      console.log("auction id ="+ auctionId);
+      //now we need to get the vendor id
+      // $.post( "/forInfo", {'vendorId':vendorId  }, function(res){
+
+      // } );
+      document.location = '/store-front?store='+vendorId+'&win=1'+'&auctionId='+auctionId;
+
+      // console.log(thisForm);
+      return false;
+  })
+
+
     //lets preload the products array
     $('#products').prop('checked',true);
 
@@ -32,6 +62,7 @@ define(["jquery","bootstrap","socketio", "cookie"], function($) {
     
 
   });
+    
 
     $('form[name=prodsandservs]').submit(function(e){
       e.preventDefault();
@@ -101,18 +132,18 @@ $('#auctionGo').on('click', function(){
   })
 
 
-$('form[name=bidForm]').submit(function(e){
-  e.preventDefault();
-  console.log($(this[0]).val());
+// $('form[name=bidForm]').submit(function(e){
+//   e.preventDefault();
+//   console.log($(this[0]).val());
 
-    // var parentElement = $(this).parent();
-     // $.post('/addBid/', $(this).serialize(), function(res){
-     //         // console.log(res);
+//     // var parentElement = $(this).parent();
+//      // $.post('/addBid/', $(this).serialize(), function(res){
+//      //         // console.log(res);
 
-     //     })
+//      //     })
 
-return false;
-})
+// return false;
+// })
 // if the vendor selects one of the auctions it should enter him into that auction
 
 $("auctionList").click(function(){
@@ -125,7 +156,7 @@ $('#bidBtn').on('click', function(event){
 })
 
 //we need to make sure the url is on the right page
-if(document.location.pathname == "/auctions"){
+if(document.location.pathname == "/auction"){
 
   var socket = io.connect('http://localhost/');
 
@@ -138,6 +169,7 @@ if(document.location.pathname == "/auctions"){
     var description = $(this[0]).val();
     var vendorId = $(this[1]).val();
     var auctionId = $(this[2]).val();
+    console.log("running");
 
     socket.emit('bid', { description: description, vendorId : vendorId, auctionId: auctionId });
     
@@ -147,31 +179,21 @@ if(document.location.pathname == "/auctions"){
 
   socket.on('bidBoxReturn', function (data) {
     // console.log("my other data");
+
     console.log(data);
     $('.bidContent').append('<div class="col-md-3">'+
       '<div class="bid">'+
       '<p>'+data.storeName+'</p>'+
       '<p>'+data.description+'<p>'+
       '<form name="vendorBidBoxForm" class="vendorBidBoxForm">'+
-      '<input type="hidden" value="'+data.auctionId+'">'+
-      '<button type="button" class="btn btn-primary vendorWinBtn">Choose</button>'+
-      '<button type="button" class="btn btn-info vendorInfoBtn">Info</button>'+
+      '<input type="hidden" name="auctionId" value="'+data.auctionID+'">'+
+      '<input type="hidden" name="vendorId" value="'+data.vendorID+'">'+
+      '<button class="btn btn-primary vendorWinBtn">Choose</button>'+
+      '<a class="btn btn-info vendorInfoBtn">Info</a>'+
       '</form></div></div>');
     
   });
 
-  $('.vendorInfoBtn').on('click', function(e){
-      // ok we need to find wich form was processed
-      var vendorId = $($(this).parent()[0][1]).val();
-      console.log(vendorId);
-      //now we need to get the vendor id
-      // $.post( "/forInfo", {'vendorId':vendorId  }, function(res){
-
-      // } );
-      document.location = '/store-front?store='+vendorId;
-
-      // console.log(thisForm);
-  })
 
 
 } //end if document

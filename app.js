@@ -77,12 +77,12 @@ app.post('/location', settings.saveLocationSettings);
 app.get('/productTypes', store.getProductTypes);
 app.get('/servicetypes', store.getServiceType);
 app.post('/vendorinfo', store.putInfo);
-app.get('/auctions', auctions.index);
-app.post('/auctions', auctions.makeAuction);
+app.post('/auction', auctions.index);
+app.post('/make-auction', auctions.makeAuction);
 app.post('/enter-auction', auctions.enterAuction);
 app.get('/auction-dashboard', auctionDashboard.index);
 app.post('/getAuctions', auctions.getAuctions);
-app.post('/addBid', auctions.addBid);
+
 
 
 app.get('/store', store.index);
@@ -91,6 +91,10 @@ app.post('/add-product-serv-image', store.addProductServImage);
 app.post('/remove-product/:id', store.removeProduct);
 app.get('/store-front', storeFront.index);
 app.post('/forInfo', storeFront.forInfo);
+
+
+
+
 
 
 
