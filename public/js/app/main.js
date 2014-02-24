@@ -105,7 +105,6 @@ $('form[name=removeProduct]').submit(function(e){
 
 $('form[name=holder]').submit(function(e){
   e.preventDefault();
-    // console.log("firing");
 
     var parentElement = $(this).parent();
     $.post('/getAuctions/', $(this).serialize(), function(res){
@@ -115,19 +114,36 @@ $('form[name=holder]').submit(function(e){
 
               options.append($("<option />").val(this._id).text(this.description));
             });
-                // if(res == "ok"){
-                //     parentElement.remove();
-                // }
-            // $('.modal-body').html(res.message);
+      
           })
 
     return false;
   })
+
+
+
 $('#auctionGo').on('click', function(){
     // console.log("hi")
     var auctionList = $('#auctionList');
-    // console.log(auctionList.find(":selected").text());
-    window.location.href = "/auctions?auction="+auctionList.find(":selected").val()+'&POR=vendor';
+    var inputArray = $('form[name=hedForm] :input');
+    var auctionId = auctionList.find(":selected").val();
+
+    inputArray.each(function(){
+      if(this.name == 'auction'){
+        $(this).val(auctionId)
+      }
+
+      if(this.name == 'POR'){
+        $(this).val('vendor');
+      }
+      $('form[name=hedForm]').submit();
+
+      
+
+    });
+     
+    
+    
 
   })
 
