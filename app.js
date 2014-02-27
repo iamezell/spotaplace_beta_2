@@ -91,6 +91,8 @@ app.post('/add-product-serv-image', store.addProductServImage);
 app.post('/remove-product/:id', store.removeProduct);
 app.get('/store-front', storeFront.index);
 app.post('/forInfo', storeFront.forInfo);
+app.get('/about', members.about);
+app.get('/contact', members.contact);
 
 
 
