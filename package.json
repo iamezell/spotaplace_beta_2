@@ -21,7 +21,7 @@
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-uglify": "~0.3.2",
-    "grunt-contrib-processhtml": "*",
+    "grunt-contrib-processhtml": "*"
 
   }
 }
