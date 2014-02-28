@@ -16,4 +16,10 @@ body {
 .productPlacement img{
 	height: 250px;
 }
+.vendorBidBox{
+	border-style: solid;
+	border-width : thin;
+	margin-left	: 30%; 
+	margin-top: 2%;
+}
 
