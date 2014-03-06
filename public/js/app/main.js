@@ -8,28 +8,30 @@ define(["jquery","bootstrap","socketio", "cookie"], function($) {
       $('.bidContent').on('click','.vendorInfoBtn', function(el){
       // ok we need to find wich form was processed
       var vendorId = $($(this).parent()[0][1]).val();
-      console.log("this is the vendor id"+vendorId);
+      var auctionId = $($(this).parent()[0][0]).val();
+
+      //console.log("this is the vendor id"+vendorId);
       //now we need to get the vendor id
       // $.post( "/forInfo", {'vendorId':vendorId  }, function(res){
 
       // } );
       document.location = '/store-front?store='+vendorId;
 
-      // console.log(thisForm);
+      // //console.log(thisForm);
   })
 
       $('.bidContent').on('click','.vendorWinBtn', function(el){
       // ok we need to find wich form was processed
       var vendorId = $($(this).parent()[0][1]).val();
       var auctionId = $($(this).parent()[0][0]).val();
-      console.log("auction id ="+ auctionId);
+      //console.log("auction id ="+ auctionId);
       //now we need to get the vendor id
       // $.post( "/forInfo", {'vendorId':vendorId  }, function(res){
 
       // } );
       document.location = '/store-front?store='+vendorId+'&win=1'+'&auctionId='+auctionId;
 
-      // console.log(thisForm);
+      // //console.log(thisForm);
       return false;
   })
 
@@ -68,7 +70,7 @@ define(["jquery","bootstrap","socketio", "cookie"], function($) {
       e.preventDefault();
 
       $.post('/vendorInfo', $(this).serialize(), function(res){
-            // console.log(res);
+            // //console.log(res);
             $('#myModal').modal();
             $('.modal-body').html(res.message);
           })
@@ -80,7 +82,7 @@ $('form[name=product-serv-submit]').submit(function(e){
   e.preventDefault();
 
   $.post('/add-product-serv', $(this).serialize(), function(res){
-    console.log(res);
+    //console.log(res);
     $('#myModal').modal();
             // $('.modal-body').html(res.message);
           })
@@ -89,11 +91,11 @@ $('form[name=product-serv-submit]').submit(function(e){
 
 $('form[name=removeProduct]').submit(function(e){
   e.preventDefault();
-    // console.log("firing");
+    // //console.log("firing");
 
     var parentElement = $(this).parent();
     $.post('/remove-product/'+$(this)[0][0].value, $(this).serialize(), function(res){
-            // console.log($(this));
+            // //console.log($(this));
             if(res == "ok"){
               parentElement.remove();
             }
@@ -108,7 +110,7 @@ $('form[name=holder]').submit(function(e){
 
     var parentElement = $(this).parent();
     $.post('/getAuctions/', $(this).serialize(), function(res){
-            // console.log(res.auctions);
+            // //console.log(res.auctions);
             var options = $('#auctionList');
             $.each(res.auctions, function() {
 
@@ -123,7 +125,7 @@ $('form[name=holder]').submit(function(e){
 
 
 $('#auctionGo').on('click', function(){
-    // console.log("hi")
+    // //console.log("hi")
     var auctionList = $('#auctionList');
     var inputArray = $('form[name=hedForm] :input');
     var auctionId = auctionList.find(":selected").val();
@@ -150,11 +152,11 @@ $('#auctionGo').on('click', function(){
 
 // $('form[name=bidForm]').submit(function(e){
 //   e.preventDefault();
-//   console.log($(this[0]).val());
+//   //console.log($(this[0]).val());
 
 //     // var parentElement = $(this).parent();
 //      // $.post('/addBid/', $(this).serialize(), function(res){
-//      //         // console.log(res);
+//      //         // //console.log(res);
 
 //      //     })
 
@@ -163,7 +165,7 @@ $('#auctionGo').on('click', function(){
 // if the vendor selects one of the auctions it should enter him into that auction
 
 $("auctionList").click(function(){
-  console.log('hello');
+  //console.log('hello');
 })
 
 
@@ -174,10 +176,13 @@ $('#bidBtn').on('click', function(event){
 //we need to make sure the url is on the right page
 if(document.location.pathname == "/auction"){
 
-  var socket = io.connect('http://spotaplace.com/');
+  var socket = io.connect('http://localhost/');
+
+  // now we need to join the room
+  // socket.emit('joinRoom', {room:})
 
 
-  console.log("hello");
+  //console.log("hello");
   
   
   $('form[name=bidForm]').submit(function(e){
@@ -185,18 +190,29 @@ if(document.location.pathname == "/auction"){
     var description = $(this[0]).val();
     var vendorId = $(this[1]).val();
     var auctionId = $(this[2]).val();
-    console.log("running");
+    //console.log("running");
 
     socket.emit('bid', { description: description, vendorId : vendorId, auctionId: auctionId });
-    
+    $('#bidModal').modal('hide');
     return false;
+    //close modal
+
   })
 
 
   socket.on('bidBoxReturn', function (data) {
-    // console.log("my other data");
+    ////console.log("my other data");
+    if($('form[name=bidForm]').length === 1  ){
+       $('.bidContent').append('<div class="row"><div class="col-md-5 vendorBidBox bid">'+
+      '<p>'+data.storeName+'</p>'+
+      '<p>'+data.description+'<p>'+
+      '<form name="vendorBidBoxForm" class="vendorBidBoxForm">'+
+      '<input type="hidden" name="auctionId" value="'+data.auctionID+'">'+
+      '<input type="hidden" name="vendorId" value="'+data.vendorID+'">'+
+      '</form></div></div>');
 
-    console.log(data);
+    }else{
+    //console.log(data);
     $('.bidContent').append('<div class="row"><div class="col-md-5 vendorBidBox bid">'+
       '<p>'+data.storeName+'</p>'+
       '<p>'+data.description+'<p>'+
@@ -206,6 +222,7 @@ if(document.location.pathname == "/auction"){
       '<button class="btn btn-primary vendorWinBtn">Choose</button>'+
       '<a class="btn btn-info vendorInfoBtn">Info</a>'+
       '</form></div></div>');
+  }
     
   });
 

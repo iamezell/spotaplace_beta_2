@@ -7,7 +7,7 @@ var express = require('express');
 var app = express();
 var http = require('http');
 var server = http.createServer(app, function(){
-	console.log("Server Created");
+	//console.log("Server Created");
 });
 var global = require('./lib/global.js');
 
@@ -17,6 +17,7 @@ var global = require('./lib/global.js');
 server.listen(3000);
 
 global.io = require('socket.io').listen(server);
+global.io.set('log level', 4);
 
 
 var MongoStore = require('connect-mongo')(express);
@@ -104,14 +105,14 @@ app.get('/contact', members.contact);
 // app.get('/users', user.list);
 
 // var server = http.createServer(app).listen(app.get('port'), function(){
-//   console.log('Express server listening on port ' + app.get('port'));
+//   ////console.log('Express server listening on port ' + app.get('port'));
   
 
 // });
 // global.io.on('connection', function(socket){ 
-// 	console.log("connected");
+// 	////console.log("connected");
 //   socket.on('hello', function(data){
-//     console.log(data);
+//     ////console.log(data);
 //   })
 // }); 
 
@@ -123,6 +124,6 @@ app.get('/contact', members.contact);
 // io.sockets.on('connection', function (socket) {
 //   socket.emit('bid', { hello: 'world' });
 //   socket.on('my other event', function (data) {
-//     console.log(data);
+//     ////console.log(data);
 //   });
 // });
