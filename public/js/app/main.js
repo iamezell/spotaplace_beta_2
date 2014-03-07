@@ -176,7 +176,7 @@ $('#bidBtn').on('click', function(event){
 //we need to make sure the url is on the right page
 if(document.location.pathname == "/auction"){
 
-  var socket = io.connect('http://spotaplace.com/');
+  var socket = io.connect('http://localhost.com/');
 
   // now we need to join the room
   // socket.emit('joinRoom', {room:})
