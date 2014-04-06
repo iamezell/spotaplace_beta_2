@@ -94,36 +94,3 @@ app.get('/store-front', storeFront.index);
 app.post('/forInfo', storeFront.forInfo);
 app.get('/about', members.about);
 app.get('/contact', members.contact);
-
-
-
-
-
-
-
-// app.get('/api', api.auth);
-// app.get('/users', user.list);
-
-// var server = http.createServer(app).listen(app.get('port'), function(){
-//   ////console.log('Express server listening on port ' + app.get('port'));
-  
-
-// });
-// global.io.on('connection', function(socket){ 
-// 	////console.log("connected");
-//   socket.on('hello', function(data){
-//     ////console.log(data);
-//   })
-// }); 
-
-
-//io.Socket.on('connection', function(){
-
-// })
-
-// io.sockets.on('connection', function (socket) {
-//   socket.emit('bid', { hello: 'world' });
-//   socket.on('my other event', function (data) {
-//     ////console.log(data);
-//   });
-// });
