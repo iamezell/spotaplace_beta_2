@@ -176,7 +176,7 @@ $('#bidBtn').on('click', function(event){
 //we need to make sure the url is on the right page
 if(document.location.pathname == "/auction"){
 
-  var socket = io.connect('http://localhost/');
+  var socket = io.connect('http://spotaplace.com');
 
   // now we need to join the room
   // socket.emit('joinRoom', {room:})
@@ -204,7 +204,7 @@ if(document.location.pathname == "/auction"){
     ////console.log("my other data");
     if($('form[name=bidForm]').length === 1  ){
        $('.bidContent').append('<div class="row"><div class="col-md-5 vendorBidBox bid">'+
-      '<p>'+data.storeName+'</p>'+
+      '<p>'+data.name+'</p>'+
       '<p>'+data.description+'<p>'+
       '<form name="vendorBidBoxForm" class="vendorBidBoxForm">'+
       '<input type="hidden" name="auctionId" value="'+data.auctionID+'">'+
@@ -214,7 +214,7 @@ if(document.location.pathname == "/auction"){
     }else{
     //console.log(data);
     $('.bidContent').append('<div class="row"><div class="col-md-5 vendorBidBox bid">'+
-      '<p>'+data.storeName+'</p>'+
+      '<p>'+data.name+'</p>'+
       '<p>'+data.description+'<p>'+
       '<form name="vendorBidBoxForm" class="vendorBidBoxForm">'+
       '<input type="hidden" name="auctionId" value="'+data.auctionID+'">'+
