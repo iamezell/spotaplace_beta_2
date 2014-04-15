@@ -201,7 +201,7 @@ if(document.location.pathname == "/auction"){
 
 
   socket.on('bidBoxReturn', function (data) {
-    ////console.log("my other data");
+    console.log(data);
     if($('form[name=bidForm]').length === 1  ){
        $('.bidContent').append('<div class="row"><div class="col-md-5 vendorBidBox bid">'+
       '<p>'+data.name+'</p>'+
