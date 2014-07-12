@@ -12,6 +12,11 @@ pids
 logs
 results
 build
+public
 .grunt
 
 node_modules
+
+build/Release
+
+.lock-wscript

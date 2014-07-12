@@ -4,6 +4,7 @@
  */
 
 var express = require('express');
+var mongoose = require('mongoose');
 var app = express();
 var http = require('http');
 var server = http.createServer(app, function(){
@@ -37,6 +38,17 @@ var store = require('./lib/routes/store');
 var api = require('./lib/routes/api');
 
 // var app = express();
+
+mongoose.connect('mongodb://localhost/spotaplacedb');
+
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+  // yay!
+  console.log('yes!!');
+
+});
 
 // all environments
 app.use(express.bodyParser());
