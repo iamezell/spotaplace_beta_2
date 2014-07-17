@@ -235,17 +235,7 @@ if(document.location.pathname == "/auction"){
 } //end if document
 
 	if(document.location.pathname == "/members"){
-//		console.log("we here now");
-		
-//		  $.get('getMemberData', function(data){
-//			  console.log("this is the output");
-//			  console.log(data);
-//			  alert(data);
-//		  });$.get('getMemberData', function(data){
-//			  console.log("this is the output");
-//			  console.log(data);
-//			  alert(data);
-//		  });
+
 		var jqxhr = $.get( "getMemberData", function() {
 //  alert( "success" );
 })
@@ -258,13 +248,39 @@ if(document.location.pathname == "/auction"){
 		//@note there has got to be a better way to do this 
 		console.log(res);
 		for(var i=0; i < res.length; i++){
-			$(".reviews-box").append('<form class="form-vertical" role="form" ><div class="form-group"><p>'+res[i][0].name+'</p></div><div class="form-group"><textarea rows="4" cols="50"></textarea></div><div class="form-group"><button class="btn btn-primary">rate them</button></div></form>');
+			$(".reviews-box").append('<form class="form-vertical" name="review-post" role="form" ><div class="form-group"><p>'+res[i][0].name+'</p></div><div class="form-group"><textarea rows="4" cols="50"></textarea></div><div class="form-group"><input type="hidden" name="vendorId" value="'+res[i][0]._id+'" ><button class="btn btn-primary" type="submit">rate them</button></div></form>');
 		}
 		
 
 //		$(".reviews-box").append()
 		
 	}
+	  
+	  
+			$('.reviewSendBtn').on('click', function(e){
+			e.preventDefault();
+			
+			console.log("hello");
+		
+		})
+	
+	$('form[name=review-post]').submit(function(e){
+    e.preventDefault();
+    var vendorId = $(this[1]).val();
+    console.log(vendorId);
+//	var jqxhr2 =  $.post("/reviews", {"vendor-id":vendorId}, function(res){
+//	
+//	}).done(function(res){
+//		console.log("done")
+//	});
+    return false;
+    //close modal
+
+  })
+		
+		
+		
+	 
   })
   .fail(function(e) {
     alert("got an error");
@@ -273,14 +289,11 @@ if(document.location.pathname == "/auction"){
 //    alert( "finished" );
   });
 		
-//		$('.reviewSendBtn').on('click', function(e){
-//			e.preventDefault();
-//			
-//			console.log("hello");
-//		
-//		})
+
 		
 	}
+	
+	
 
 
 

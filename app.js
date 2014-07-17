@@ -96,6 +96,7 @@ app.post('/enter-auction', auctions.enterAuction);
 app.get('/auction-dashboard', auctionDashboard.index);
 app.post('/getAuctions', auctions.getAuctions);
 app.get('/getMemberData', members.getMemberData);
+app.get('/reviews', members.postReview);
 
 
 
