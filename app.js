@@ -95,6 +95,7 @@ app.post('/make-auction', auctions.makeAuction);
 app.post('/enter-auction', auctions.enterAuction);
 app.get('/auction-dashboard', auctionDashboard.index);
 app.post('/getAuctions', auctions.getAuctions);
+app.get('/getMemberData', members.getMemberData);
 
 
 

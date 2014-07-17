@@ -1,0 +1,36 @@
+[
+	[
+		{
+			"__v":7,
+			"_id":"534d7ff35993d5497b0a01cc",
+			"addressCity":"Brooklyn",
+			"addressState":"NY",
+			"addressStreet":"464 Pine st",
+			"addressZip":"11208",
+			"email":"iamezell@gmil.com",
+			"name":"Ezell's second businesss",
+			"phone":"718-938-0405",
+			"vendorSubType":"Toys and Baby",
+			"vendorType":"product",
+			"userId":["5341a4e36beca100002094cd"],
+			"auctions":[
+				{
+					"vendorsAttached":[],
+					"bids":[
+						{"_id":"53c3d66e8a10d900008b9437",
+						 "vendorName":"Ezell's second businesss",
+						 "description":"test",
+						 		"vendorId":"534d7ff35993d5497b0a01cc"
+						}
+					],
+					"__v":0,
+					"_id":"53c3d6018a10d900008b9435",
+					"activated":true,
+					"userId":"5341a4e36beca100002094cd",
+					"rate":10,
+					"type":"Toys and Baby",
+					"description":"test "
+				}
+			]
+		}
+	],

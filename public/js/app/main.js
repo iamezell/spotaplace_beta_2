@@ -234,6 +234,54 @@ if(document.location.pathname == "/auction"){
 
 } //end if document
 
+	if(document.location.pathname == "/members"){
+//		console.log("we here now");
+		
+//		  $.get('getMemberData', function(data){
+//			  console.log("this is the output");
+//			  console.log(data);
+//			  alert(data);
+//		  });$.get('getMemberData', function(data){
+//			  console.log("this is the output");
+//			  console.log(data);
+//			  alert(data);
+//		  });
+		var jqxhr = $.get( "getMemberData", function() {
+//  alert( "success" );
+})
+  .done(function(res) {
+    if(res.message == "none"){
+		console.log("There is no one to review.");
+		$(".reviews-box").append("<p>There is no one to review yet.</p>")
+	}else{
+//		var myRes = JSON.parse(res);
+		//@note there has got to be a better way to do this 
+		console.log(res);
+		for(var i=0; i < res.length; i++){
+			$(".reviews-box").append('<form class="form-vertical" role="form" ><div class="form-group"><p>'+res[i][0].name+'</p></div><div class="form-group"><textarea rows="4" cols="50"></textarea></div><div class="form-group"><button class="btn btn-primary">rate them</button></div></form>');
+		}
+		
+
+//		$(".reviews-box").append()
+		
+	}
+  })
+  .fail(function(e) {
+    alert("got an error");
+  })
+  .always(function() {
+//    alert( "finished" );
+  });
+		
+//		$('.reviewSendBtn').on('click', function(e){
+//			e.preventDefault();
+//			
+//			console.log("hello");
+//		
+//		})
+		
+	}
+
 
 
 
