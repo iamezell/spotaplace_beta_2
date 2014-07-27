@@ -18,5 +18,5 @@ public
 node_modules
 
 build/Release
-
+bower_components
 .lock-wscript
