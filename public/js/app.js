@@ -5,7 +5,8 @@ requirejs.config({
       "jquery": "jquery-1.10.1.min",
       "bootstrap" :"bootstrap",
       "cookie" :"jquery.cookie",
-      "socketio" : "/socket.io/socket.io"
+      "socketio" : "/socket.io/socket.io",
+	  "validate" : ""
 
     },
     shim: {
