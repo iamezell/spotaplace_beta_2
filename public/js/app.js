@@ -6,11 +6,22 @@ requirejs.config({
       "bootstrap" :"bootstrap",
       "cookie" :"jquery.cookie",
       "socketio" : "/socket.io/socket.io",
-	  "validate" : ""
+			"tubular" : "jquery.tubular.1.0",
+			"WOW" : "wow.min", 
+			"countdown" : "jquery.countdown.min",
+			"bootstrapValidator" : "bootstrapValidator.min",
+			"Ladda" : "ladda.min",
+			"retina" : "retina.min"
 
     },
     shim: {
         "bootstrap": {
+            deps: ["jquery"]
+        },
+			"countdown": {
+            deps: ["jquery"]
+        },
+			"tubular": {
             deps: ["jquery"]
         },
         "cookie": {

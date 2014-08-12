@@ -1,9 +1,156 @@
-define(["jquery","bootstrap","socketio", "cookie"], function($) {
+define(["jquery","bootstrap","socketio", "cookie", "tubular","WOW", "countdown", "bootstrapValidator"], function($) {
 	//the jquery.alpha.js and jquery.beta.js plugins have been loaded.
 	var test = {};
 
 
 	$(document).ready(function(){
+		
+		$('#status').fadeOut();
+	$('#preloader').delay(350).fadeOut('slow');
+	$('body').delay(350).css({
+		'overflow': 'visible'
+			});
+		
+		
+		
+		// check if are on the homepage
+		if(document.location.pathname == "/"){
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Windows Phone|Opera Mini/i.test(navigator.userAgent) ) {
+		$.backstretch([
+			"img/background/1.jpg"
+		]);
+	}
+	else {
+		$('#home').tubular({
+			videoId: 'XqWEPwuIYtA'
+		}); // where videoId is the YouTube ID.
+	}
+			
+				/* ---------------------------------------------------------
+	 * Menu Button
+	 */
+
+	var isToggled = false;
+
+	$("#menu-btn").on("click", function () {
+		if (isToggled) {
+			$(this).children("i").attr("class", "fa fa-bars");
+			isToggled = false;
+		} else {
+			$(this).children("i").attr("class", "fa fa-times");
+			isToggled = true;
+		}
+	});
+			
+			
+			new WOW().init();
+			
+			/* ---------------------------------------------------------
+	 * Scroll arrow
+	 */
+	
+	$("#scroll").click(function () {
+	 	if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+	 		var target = $(this.hash);
+	 		target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+	 		if (target.length) {
+	 			$('html,body').animate({
+	 				scrollTop: target.offset().top
+	 			}, 1200);
+	 			return false;
+	 		}
+	 	}
+	 });
+
+			/* ---------------------------------------------------------
+	 * Scroll arrow
+	 */
+	
+	$("#scroll").click(function () {
+	 	if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+	 		var target = $(this.hash);
+	 		target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+	 		if (target.length) {
+	 			$('html,body').animate({
+	 				scrollTop: target.offset().top
+	 			}, 1200);
+	 			return false;
+	 		}
+	 	}
+	 });
+
+			/* ---------------------------------------------------------
+	 * Countdown
+	 */
+
+	var description = {
+		weeks: "weeks",
+		days: "days",
+		hours: "hours",
+		minutes: "minutes",
+		seconds: "seconds"
+	};
+	
+	// year/month/day
+	$('#countdown').countdown('2014/10/1', function (event) {
+		$(this).html(event.strftime(
+			'<div class="countdown-section"><b>%w</b> <span>' + description.weeks + '</span> </div>' +
+			'<div class="countdown-section"><b>%d</b> <span>' + description.days + '</span> </div>' +
+			'<div class="countdown-section"><b>%H</b> <span>' + description.hours + '</span> </div>' +
+			'<div class="countdown-section"><b>%M</b> <span>' + description.minutes + '</span> </div>' +
+			'<div class="countdown-section"><b>%S</b> <span>' + description.seconds + '</span> </div>'
+		));
+	});
+				/* ---------------------------------------------------------
+	 * Form validation
+	 */
+
+	/* Signup form */
+
+	$('#signupForm').bootstrapValidator({
+		message: 'This value is not valid',
+		feedbackIcons: {
+			valid: 'fa fa-check',
+			invalid: 'fa fa-times',
+			validating: 'fa fa-refresh'
+		},
+		submitHandler: function (validator, form, submitButton) {
+			var l = Ladda.create(submitButton[0]),
+				btnText = submitButton.children(".ladda-label");
+			
+			l.start();
+			btnText.html("Signing up...");
+			
+			$.get(form.attr('action'), form.serialize(), function(result) { 
+				btnText.html(result.message);							
+			}, 'json')
+			.always(function() { 
+				l.stop(); 
+				validator.disableSubmitButtons(true);
+			});
+		},
+		fields: {
+			email: {
+				validators: {
+					notEmpty: {
+						message: 'Email cannot be empty'
+					},
+					emailAddress: {
+						message: 'The input is not a valid email address'
+					}
+				}
+			}
+		}
+	});
+			
+		}//end homepage check
+
+		
+		
+		
+		
+		
+		
 
 	  $('.bidContent').on('click','.vendorInfoBtn', function(el){
 	  // ok we need to find wich form was processed
