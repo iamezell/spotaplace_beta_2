@@ -98,6 +98,7 @@ app.post('/getAuctions', auctions.getAuctions);
 app.get('/getMemberData', members.getMemberData);
 app.post('/reviews', members.postReview);
 app.post('/getReviews', members.getReviews);
+app.post('/interested', members.saveEmails)
 
 
 

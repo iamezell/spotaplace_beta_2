@@ -142,6 +142,18 @@ define(["jquery","bootstrap","socketio", "cookie", "tubular","WOW", "countdown",
 			}
 		}
 	});
+			$('.signup').on('click',  function(e){
+				
+				var signupInput = $('#email-list').val();
+				e.preventDefault();
+			$.post( "/interested", {'email':signupInput  }, function(res){
+
+			})
+				
+			})
+
+
+
 			
 		}//end homepage check
 
