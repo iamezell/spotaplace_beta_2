@@ -714,7 +714,8 @@ form.signup button.btn {
 
 .team-member {
 	padding-bottom: 25px;
-	background: rgba(255,255,255,0.2);
+/*	background: rgba(255,255,255,0.2);*/
+	background-color: #2d2e2e;
 }
 
 .team-member-profession{

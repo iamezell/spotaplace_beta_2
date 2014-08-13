@@ -152,6 +152,18 @@ define(["jquery","bootstrap","socketio", "cookie", "tubular","WOW", "countdown",
 				
 			})
 
+			$('#contactForm').on('click', function(e){
+				e.preventDefault();
+				var name = $('#contact-name').val();
+				var email = $('#contact-email').val();
+				var message = $('#contact-message').val();
+				
+				
+				$.post( "/contactus", {'email':email, 'name' : name, 'message' : message  }, function(res){
+						console.log(res);
+			})
+				
+			})
 
 
 			
