@@ -22,7 +22,7 @@ define(["jquery","bootstrap","socketio", "cookie", "tubular","WOW", "countdown",
 	}
 	else {
 		$('#home').tubular({
-			videoId: 'd_TKI9QfmI8'
+			videoId: 'XqWEPwuIYtA'
 		}); // where videoId is the YouTube ID.
 	}
 			

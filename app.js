@@ -15,7 +15,7 @@ var global = require('./lib/global.js');
 // var app = require('express')();
 // var server = require('http').Server(app);
 // var io = require('socket.io').listen(server);
-server.listen(80);
+server.listen(3000);
 
 global.io = require('socket.io').listen(server);
 global.io.set('log level', 4);
