@@ -856,3 +856,11 @@ p.copyright {
 		float: right !important;
 	}
 }
+
+.message{
+	padding-top: 47px;
+}
+
+.message p {
+	background-color: #2d2e2e; 
+}
