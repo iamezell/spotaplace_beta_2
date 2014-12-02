@@ -15,7 +15,7 @@ var global = require('./lib/global.js');
 // var app = require('express')();
 // var server = require('http').Server(app);
 // var io = require('socket.io').listen(server);
-server.listen(3000);
+server.listen(80);
 
 global.io = require('socket.io').listen(server);
 global.io.set('log level', 4);
@@ -52,7 +52,7 @@ db.once('open', function callback () {
 
 // all environments
 app.use(express.bodyParser());
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 80);
 app.set('views', path.join(__dirname, 'lib/views'));
 app.set('view engine', 'ejs');
 app.use(express.favicon());
